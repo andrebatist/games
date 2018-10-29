@@ -37,12 +37,12 @@ public class Logic {
         return rst;
     }
 
-    public boolean isFree(Cell ... cells) {
+    public boolean isFree(Cell... cells) {
         boolean result = cells.length > 0;
         for (Cell cell : cells) {
             if (this.findBy(cell) != -1) {
-               result = false;
-               break;
+                result = false;
+                break;
             }
         }
         return result;
@@ -69,10 +69,62 @@ public class Logic {
     public boolean isWin() {
         int[][] table = this.convert();
         boolean result = false;
+        int count = 0;
+        if (table[0][0] == 1) {
+            if (table[0][1] == 1) {
+                for (int i = 0; i < table.length; i++) {
+                    if (table[0][i] == 1) {
+                        count++;
+                    } else {
+                        count = 0;
+                        break;
+                    }
+                }
+            }
+            if (table[1][0] == 1) {
+                for (int i = 0; i < table.length; i++) {
+                    if (table[i][0] == 1) {
+                        count++;
+                    } else {
+                        count = 0;
+                        break;
+                    }
+                }
+            }
+        } else {
+            for (int i = 1; i < table.length; i++) {
+                if (table[0][i] == 1) {
+                    for (int j = 0; j < table.length; j++) {
+                        if (table[j][i] == 1) {
+                            count++;
+                        } else {
+                            count = 0;
+                            break;
+                        }
+                    }
+                    break;
+                }
+                if (table[i][0] == 1) {
+                    for (int j = 0; j < table.length; j++) {
+                        if (table[i][j] == 1) {
+                            count++;
+                        } else {
+                            count = 0;
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+
+        if (count == table.length) {
+            result = true;
+        }
         return result;
     }
 
-    private int[][] convert() {
+    public int[][] convert() {
         int[][] table = new int[this.size][this.size];
         for (int row = 0; row != table.length; row++) {
             for (int cell = 0; cell != table.length; cell++) {
