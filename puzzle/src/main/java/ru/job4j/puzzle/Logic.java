@@ -70,22 +70,28 @@ public class Logic {
         int[][] table = this.convert();
         boolean result = false;
         int count = 0;
+        int firstCount = 0;
         int previ = 0;
         int prevj = 0;
         for (int i = 0; i < table.length; i++) {
             for (int j = 0; j < table.length; j++) {
                 if (table[i][j] == 1) {
-                    if ((i == previ) || (j == prevj)) {
+                    firstCount++;
+                    if (firstCount == 1) {
+                        previ = i;
+                        prevj = j;
+                        count++;
+                    }
+                    if ((((i == previ)&&(j == prevj +1)) || ((j == prevj)&&(i == previ + 1)))
+                            &&(firstCount > 1)) {
                         count++;
                     }
                     previ = i;
                     prevj = j;
                 }
-
             }
-
         }
-        if (count == table.length) {
+        if ((count == table.length)&&(firstCount == table.length)) {
             result = true;
         }
         return result;
