@@ -12,11 +12,11 @@ public class LogicTest {
             @Override
             public int[][] convert() {
                 return new int[][]{
-                        {0, 0, 1, 0, 0},
-                        {0, 0, 1, 0, 0},
-                        {0, 0, 1, 0, 0},
-                        {0, 0, 1, 0, 0},
-                        {0, 0, 1, 0, 0},
+                        {0, 1, 0, 0, 0},
+                        {0, 1, 0, 0, 0},
+                        {0, 1, 0, 0, 0},
+                        {0, 1, 0, 0, 0},
+                        {0, 1, 0, 0, 0},
                 };
             }
         };
@@ -51,6 +51,23 @@ public class LogicTest {
                         {1, 1, 0, 1, 1},
                         {0, 0, 1, 0, 0},
                         {0, 0, 1, 0, 0},
+                };
+            }
+        };
+        assertThat(logic.isWin(), is(false));
+    }
+
+    @Test
+    public void whenTotalLose() {
+        Logic logic = new Logic(5) {
+            @Override
+            public int[][] convert() {
+                return new int[][]{
+                        {1, 0, 0, 0, 1},
+                        {0, 0, 0, 0, 0},
+                        {0, 0, 0, 0, 1},
+                        {0, 0, 0, 0, 1},
+                        {0, 0, 0, 0, 1},
                 };
             }
         };

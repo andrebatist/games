@@ -70,54 +70,21 @@ public class Logic {
         int[][] table = this.convert();
         boolean result = false;
         int count = 0;
-        if (table[0][0] == 1) {
-            if (table[0][1] == 1) {
-                for (int i = 0; i < table.length; i++) {
-                    if (table[0][i] == 1) {
+        int previ = 0;
+        int prevj = 0;
+        for (int i = 0; i < table.length; i++) {
+            for (int j = 0; j < table.length; j++) {
+                if (table[i][j] == 1) {
+                    if ((i == previ) || (j == prevj)) {
                         count++;
-                    } else {
-                        count = 0;
-                        break;
                     }
+                    previ = i;
+                    prevj = j;
                 }
-            }
-            if (table[1][0] == 1) {
-                for (int i = 0; i < table.length; i++) {
-                    if (table[i][0] == 1) {
-                        count++;
-                    } else {
-                        count = 0;
-                        break;
-                    }
-                }
-            }
-        } else {
-            for (int i = 1; i < table.length; i++) {
-                if (table[0][i] == 1) {
-                    for (int j = 0; j < table.length; j++) {
-                        if (table[j][i] == 1) {
-                            count++;
-                        } else {
-                            count = 0;
-                            break;
-                        }
-                    }
-                    break;
-                }
-                if (table[i][0] == 1) {
-                    for (int j = 0; j < table.length; j++) {
-                        if (table[i][j] == 1) {
-                            count++;
-                        } else {
-                            count = 0;
-                            break;
-                        }
-                    }
-                    break;
-                }
-            }
-        }
 
+            }
+
+        }
         if (count == table.length) {
             result = true;
         }
