@@ -69,34 +69,31 @@ public class Logic {
     public boolean isWin() {
         int[][] table = this.convert();
         boolean result = false;
-        int count = 0;
-        int firstCount = 0;
+        int counti = 0;
+        int countj = 0;
+        int totalCount = 0;
         int previ = 0;
         int prevj = 0;
-        boolean isI = false;
         for (int i = 0; i < table.length; i++) {
             for (int j = 0; j < table.length; j++) {
                 if (table[i][j] == 1) {
-                    firstCount++;
-                    if (firstCount == 1) {
+                    totalCount++;
+                    if (totalCount == 1) {
                         previ = i;
                         prevj = j;
-                        count++;
+                        counti++;
+                        countj++;
                     }
-                    if ((i == previ) && (firstCount > 1)) {
-                        count++;
-                        isI = true;
+                    if ((i == previ) && (totalCount > 1)) {
+                        counti++;
                     }
-                    if (isI) {
-                        continue;
-                    }
-                    if ((j == prevj) && (firstCount > 1)) {
-                        count++;
+                    if ((j == prevj) && (totalCount > 1)) {
+                        countj++;
                     }
                 }
             }
         }
-        if ((count == table.length) && (firstCount == table.length)) {
+        if (((counti == table.length) || (countj == table.length)) && (totalCount == table.length)) {
             result = true;
         }
         return result;
