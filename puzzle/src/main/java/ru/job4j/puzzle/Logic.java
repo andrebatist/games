@@ -73,6 +73,7 @@ public class Logic {
         int firstCount = 0;
         int previ = 0;
         int prevj = 0;
+        boolean isI = false;
         for (int i = 0; i < table.length; i++) {
             for (int j = 0; j < table.length; j++) {
                 if (table[i][j] == 1) {
@@ -82,16 +83,20 @@ public class Logic {
                         prevj = j;
                         count++;
                     }
-                    if ((((i == previ)&&(j == prevj +1)) || ((j == prevj)&&(i == previ + 1)))
-                            &&(firstCount > 1)) {
+                    if ((i == previ) && (firstCount > 1)) {
+                        count++;
+                        isI = true;
+                    }
+                    if (isI) {
+                        continue;
+                    }
+                    if ((j == prevj) && (firstCount > 1)) {
                         count++;
                     }
-                    previ = i;
-                    prevj = j;
                 }
             }
         }
-        if ((count == table.length)&&(firstCount == table.length)) {
+        if ((count == table.length) && (firstCount == table.length)) {
             result = true;
         }
         return result;

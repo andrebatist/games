@@ -30,8 +30,8 @@ public class LogicTest {
             public int[][] convert() {
                 return new int[][]{
                         {0, 0, 0, 0, 0},
-                        {0, 0, 0, 0, 0},
                         {1, 1, 1, 1, 1},
+                        {0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0},
                         {0, 0, 0, 0, 0},
                 };
@@ -68,6 +68,23 @@ public class LogicTest {
                         {0, 0, 0, 0, 1},
                         {0, 0, 0, 0, 1},
                         {0, 0, 0, 0, 1},
+                };
+            }
+        };
+        assertThat(logic.isWin(), is(false));
+    }
+
+    @Test
+    public void whenTotalLose2() {
+        Logic logic = new Logic(5) {
+            @Override
+            public int[][] convert() {
+                return new int[][]{
+                        {0, 0, 0, 1, 1},
+                        {0, 0, 0, 1, 0},
+                        {0, 0, 0, 1, 0},
+                        {0, 0, 0, 1, 0},
+                        {0, 0, 0, 0, 0},
                 };
             }
         };
