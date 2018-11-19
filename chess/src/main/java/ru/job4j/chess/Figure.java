@@ -4,13 +4,17 @@ import ru.job4j.chess.exceptions.ImpossibleMoveException;
 import ru.job4j.chess.firuges.Cell;
 
 public abstract class Figure {
-    final Cell position;
+    private final Cell position;
 
     public Figure(Cell position) {
         this.position = position;
     }
 
-    abstract Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException;
+    public Cell getPosition() {
+        return position;
+    }
 
-    abstract Figure copy(Cell dest);
+    public abstract Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException;
+
+    public abstract Figure copy(Cell dest);
 }
