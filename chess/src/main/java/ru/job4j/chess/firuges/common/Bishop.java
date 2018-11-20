@@ -4,8 +4,6 @@ import ru.job4j.chess.Figure;
 import ru.job4j.chess.exceptions.ImpossibleMoveException;
 import ru.job4j.chess.firuges.Cell;
 
-import java.util.Arrays;
-
 public class Bishop extends Figure {
     public Bishop(Cell position) {
         super(position);
@@ -13,94 +11,16 @@ public class Bishop extends Figure {
 
     @Override
     public Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException {
-        if (!((Math.abs(source.x - dest.x) == Math.abs(source.y - dest.y)
-                && ((source.x != dest.x) && (source.y != dest.y))))) {
+        if (!(Math.abs(source.x - dest.x) == Math.abs(source.y - dest.y))) {
             throw new ImpossibleMoveException("Слоном ходить на эту клетку нельзя.");
         }
         Cell[] cells = new Cell[7];
-        int count;
-        if (source.x < dest.x) {
-            if (source.y < dest.y) {
-                count = setCellsDeltaXPlusYPlus(source, dest, cells);
-            } else {
-                count = setCellsDeltaXPlusYMinus(source, dest, cells);
-            }
-        } else {
-            if (source.y > dest.y) {
-                count = setCellsDeltaXMinusYMinus(source, dest, cells);
-            } else {
-                count = setCellsDeltaXMinusYPlus(source, dest, cells);
-            }
+        int deltaX = source.x < dest.x ? 1 : -1;
+        int deltaY = source.y < dest.y ? 1 : -1;
+        for (int i = 1; i <= Math.abs(dest.x - source.x); i++) {
+            cells[i - 1] = Cell.getCell(source.x + i * deltaX, source.y + i * deltaY);
         }
-        return Arrays.copyOf(cells, count);
-    }
-
-    private int setCellsDeltaXPlusYPlus(Cell source, Cell dest, Cell[] cells) {
-        int count = 0;
-        int x = source.x;
-        int y = source.y;
-        while ((x < dest.x) && (y < dest.y)) {
-            for (Cell cell : Cell.values()) {
-                if ((cell.x == x + 1) && (cell.y == y + 1)) {
-                    cells[count++] = cell;
-                    break;
-                }
-            }
-            x++;
-            y++;
-        }
-        return count;
-    }
-
-    private int setCellsDeltaXPlusYMinus(Cell source, Cell dest, Cell[] cells) {
-        int count = 0;
-        int x = source.x;
-        int y = source.y;
-        while ((x < dest.x) && (y > dest.y)) {
-            for (Cell cell : Cell.values()) {
-                if ((cell.x == x + 1) && (cell.y == y - 1)) {
-                    cells[count++] = cell;
-                    break;
-                }
-            }
-            x++;
-            y--;
-        }
-        return count;
-    }
-
-    private int setCellsDeltaXMinusYMinus(Cell source, Cell dest, Cell[] cells) {
-        int count = 0;
-        int x = source.x;
-        int y = source.y;
-        while ((x > dest.x) && (y > dest.y)) {
-            for (Cell cell : Cell.values()) {
-                if ((cell.x == x - 1) && (cell.y == y - 1)) {
-                    cells[count++] = cell;
-                    break;
-                }
-            }
-            x--;
-            y--;
-        }
-        return count;
-    }
-
-    private int setCellsDeltaXMinusYPlus(Cell source, Cell dest, Cell[] cells) {
-        int count = 0;
-        int x = source.x;
-        int y = source.y;
-        while ((x > dest.x) && (y < dest.y)) {
-            for (Cell cell : Cell.values()) {
-                if ((cell.x == x - 1) && (cell.y == y + 1)) {
-                    cells[count++] = cell;
-                    break;
-                }
-            }
-            x--;
-            y++;
-        }
-        return count;
+        return cells;
     }
 
     @Override

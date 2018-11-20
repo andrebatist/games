@@ -36,12 +36,13 @@ public class Board {
 
     private void checkIsOccupied(Cell[] cells) {
         for (Cell cell : cells) {
-            for (Figure fig : figures) {
-                if ((fig != null) && fig.getPosition().equals(cell)) {
-                    throw new OccupiedWayException("Недопустимый ход. Путь фигуры занят.");
+            if (cell != null) {
+                for (Figure fig : figures) {
+                    if ((fig != null) && fig.getPosition().equals(cell)) {
+                        throw new OccupiedWayException("Недопустимый ход. Путь фигуры занят.");
+                    }
                 }
             }
-
         }
     }
 }

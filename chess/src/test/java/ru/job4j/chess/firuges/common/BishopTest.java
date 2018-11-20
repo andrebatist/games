@@ -17,32 +17,32 @@ public class BishopTest {
     @Test
     public void whenWayDeltaXPlusYPlusThenArrayCell() {
         Figure bishop = new Bishop(Cell.D2);
-        Cell[] expect = new Cell[]{Cell.E3,Cell.F4};
-        Cell[] rst = bishop.way(Cell.D2,Cell.F4);
+        Cell[] expect = new Cell[]{Cell.E3, Cell.F4, null, null, null, null, null};
+        Cell[] rst = bishop.way(Cell.D2, Cell.F4);
         assertThat(rst, is(expect));
     }
 
     @Test
     public void whenWayDeltaXPlusYMinusThenArrayCell() {
         Figure bishop = new Bishop(Cell.D2);
-        Cell[] expect = new Cell[]{Cell.E1};
-        Cell[] rst = bishop.way(Cell.D2,Cell.E1);
+        Cell[] expect = new Cell[]{Cell.E1, null, null, null, null, null, null};
+        Cell[] rst = bishop.way(Cell.D2, Cell.E1);
         assertThat(rst, is(expect));
     }
 
     @Test
     public void whenWayDeltaXMinusYMinusThenArrayCell() {
         Figure bishop = new Bishop(Cell.D2);
-        Cell[] expect = new Cell[]{Cell.C1};
-        Cell[] rst = bishop.way(Cell.D2,Cell.C1);
+        Cell[] expect = new Cell[]{Cell.C1, null, null, null, null, null, null};
+        Cell[] rst = bishop.way(Cell.D2, Cell.C1);
         assertThat(rst, is(expect));
     }
 
     @Test
     public void whenWayDeltaXMinusYPlusThenArrayCell() {
         Figure bishop = new Bishop(Cell.D2);
-        Cell[] expect = new Cell[]{Cell.C3,Cell.B4,Cell.A5};
-        Cell[] rst = bishop.way(Cell.D2,Cell.A5);
+        Cell[] expect = new Cell[]{Cell.C3, Cell.B4, Cell.A5, null, null, null, null};
+        Cell[] rst = bishop.way(Cell.D2, Cell.A5);
         assertThat(rst, is(expect));
     }
 
@@ -50,6 +50,6 @@ public class BishopTest {
     public void whenWayWrongCell() {
         Figure bishop = new Bishop(Cell.D2);
         exceptionGrabber.expect(ImpossibleMoveException.class);
-        bishop.way(Cell.D2,Cell.C2);
+        bishop.way(Cell.D2, Cell.C2);
     }
 }
