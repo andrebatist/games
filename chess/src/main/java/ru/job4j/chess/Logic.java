@@ -1,5 +1,8 @@
 package ru.job4j.chess;
 
+import ru.job4j.chess.exceptions.FigureNotFoundException;
+import ru.job4j.chess.exceptions.ImpossibleMoveException;
+import ru.job4j.chess.exceptions.OccupiedWayException;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
 import ru.job4j.chess.firuges.black.BishopBlack;
@@ -15,17 +18,23 @@ import ru.job4j.chess.firuges.common.Bishop;
 public class Logic {
     private final Figure[] figures = new Figure[32];
     private int index = 0;
-    private Board board = new Board();
+
+    private ru.job4j.chess.Figure[] figuresAbstract = new ru.job4j.chess.Figure[32];
+
+    private int count = 0;
+
+    private void addFigAbstract(ru.job4j.chess.Figure figure) {
+        this.figuresAbstract[this.count++] = figure;
+    }
 
     public void add(Figure figure) {
         this.figures[this.index++] = figure;
         ru.job4j.chess.Figure figureAbstract = null;
         if (figure instanceof BishopBlack) {
-            ru.job4j.chess.Figure bishop = new Bishop(figure.position());
-            figureAbstract = bishop;
+            figureAbstract = new Bishop(figure.position());
         }
         if (figureAbstract != null) {
-            this.board.add(figureAbstract);
+            addFigAbstract(figureAbstract);
         }
     }
 
@@ -33,7 +42,7 @@ public class Logic {
         boolean rst = false;
         int index = this.findBy(source);
         try {
-            this.board.move(source, dest);
+            wayValidate(source,dest);
         } catch (RuntimeException re) {
             re.printStackTrace();
             return false;
@@ -64,5 +73,38 @@ public class Logic {
             }
         }
         return rst;
+    }
+
+    public void wayValidate(Cell source, Cell dest) throws ImpossibleMoveException,
+            OccupiedWayException, FigureNotFoundException {
+        boolean found = false;
+        ru.job4j.chess.Figure figure = null;
+        int index = 0;
+        for (ru.job4j.chess.Figure fig : figuresAbstract) {
+            if ((fig != null) && (fig.getPosition().x == source.x) && (fig.getPosition().y == source.y)) {
+                found = true;
+                figure = fig;
+                break;
+            }
+            index++;
+        }
+        if (!found) {
+            throw new FigureNotFoundException("На данной клетке нет фигуры");
+        }
+        Cell[] cells = figure.way(source, dest);
+        checkIsOccupied(cells);
+        this.figuresAbstract[index] = figure.copy(dest);
+    }
+
+    private void checkIsOccupied(Cell[] cells) {
+        for (Cell cell : cells) {
+            if (cell != null) {
+                for (ru.job4j.chess.Figure fig : figuresAbstract) {
+                    if ((fig != null) && fig.getPosition().equals(cell)) {
+                        throw new OccupiedWayException("Недопустимый ход. Путь фигуры занят.");
+                    }
+                }
+            }
+        }
     }
 }
