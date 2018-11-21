@@ -18,19 +18,21 @@ public class Board {
             OccupiedWayException, FigureNotFoundException {
         boolean found = false;
         Figure figure = null;
+        int index = 0;
         for (Figure fig : figures) {
             if ((fig != null) && (fig.getPosition().x == source.x) && (fig.getPosition().y == source.y)) {
                 found = true;
                 figure = fig;
                 break;
             }
+            index++;
         }
         if (!found) {
             throw new FigureNotFoundException("На данной клетке нет фигуры");
         }
         Cell[] cells = figure.way(source, dest);
         checkIsOccupied(cells);
-        figure.copy(dest);
+        this.figures[index] = figure.copy(dest);
         return true;
     }
 
