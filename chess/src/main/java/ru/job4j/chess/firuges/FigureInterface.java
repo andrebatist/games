@@ -1,6 +1,6 @@
 package ru.job4j.chess.firuges;
 
-public interface Figure {
+public interface FigureInterface {
     Cell position();
 
     Cell[] way(Cell source, Cell dest);
@@ -12,6 +12,6 @@ public interface Figure {
 
     }
 
-    Figure copy(Cell dest);
+    FigureInterface copy(Cell dest);
 
 }

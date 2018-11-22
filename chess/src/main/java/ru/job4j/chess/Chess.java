@@ -13,7 +13,6 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import ru.job4j.chess.firuges.Cell;
-import ru.job4j.chess.firuges.Figure;
 import ru.job4j.chess.firuges.black.BishopBlack;
 
 public class Chess extends Application {
@@ -153,7 +152,7 @@ public class Chess extends Application {
 
     public void add(Figure figure, Group grid) {
         this.logic.add(figure);
-        Cell position = figure.position();
+        Cell position = figure.getPosition();
         grid.getChildren().add(
                 this.buildFigure(
                         position.x * 40 + 5,

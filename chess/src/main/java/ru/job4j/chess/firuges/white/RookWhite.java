@@ -1,7 +1,7 @@
 package ru.job4j.chess.firuges.white;
 
 import ru.job4j.chess.firuges.Cell;
-import ru.job4j.chess.firuges.Figure;
+import ru.job4j.chess.firuges.FigureInterface;
 
 /**
  *
@@ -9,7 +9,7 @@ import ru.job4j.chess.firuges.Figure;
  * @version $Id$
  * @since 0.1
  */
-public class RookWhite implements Figure {
+public class RookWhite implements FigureInterface {
     private final Cell position;
 
     public RookWhite(final Cell position) {
@@ -27,7 +27,7 @@ public class RookWhite implements Figure {
     }
 
     @Override
-    public Figure copy(Cell dest) {
+    public FigureInterface copy(Cell dest) {
         return new RookWhite(dest);
     }
 }

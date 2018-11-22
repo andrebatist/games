@@ -1,7 +1,7 @@
 package ru.job4j.chess.firuges.white;
 
 import ru.job4j.chess.firuges.Cell;
-import ru.job4j.chess.firuges.Figure;
+import ru.job4j.chess.firuges.FigureInterface;
 
 /**
  * //TODO add comments.
@@ -10,7 +10,7 @@ import ru.job4j.chess.firuges.Figure;
  * @version $Id$
  * @since 0.1
  */
-public class PawnWhite implements Figure {
+public class PawnWhite implements FigureInterface {
     private final Cell position;
 
     public PawnWhite(final Cell position) {
@@ -28,7 +28,7 @@ public class PawnWhite implements Figure {
     }
 
     @Override
-    public Figure copy(Cell dest) {
+    public FigureInterface copy(Cell dest) {
         return new PawnWhite(dest);
     }
 }

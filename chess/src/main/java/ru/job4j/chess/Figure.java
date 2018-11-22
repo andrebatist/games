@@ -17,4 +17,11 @@ public abstract class Figure {
     public abstract Cell[] way(Cell source, Cell dest) throws ImpossibleMoveException;
 
     public abstract Figure copy(Cell dest);
+
+    public String icon() {
+        return String.format(
+                "%s.png", this.getClass().getSimpleName()
+        );
+
+    }
 }
