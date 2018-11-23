@@ -1,7 +1,6 @@
-package ru.job4j.chess;
+package ru.job4j.chess.figures;
 
 import ru.job4j.chess.exceptions.ImpossibleMoveException;
-import ru.job4j.chess.firuges.Cell;
 
 public abstract class Figure {
     private final Cell position;

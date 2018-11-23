@@ -3,10 +3,9 @@ package ru.job4j.chess;
 import ru.job4j.chess.exceptions.FigureNotFoundException;
 import ru.job4j.chess.exceptions.ImpossibleMoveException;
 import ru.job4j.chess.exceptions.OccupiedWayException;
-import ru.job4j.chess.firuges.Cell;
-import ru.job4j.chess.firuges.FigureInterface;
-import ru.job4j.chess.firuges.black.BishopBlack;
-import ru.job4j.chess.firuges.common.Bishop;
+import ru.job4j.chess.figures.Cell;
+import ru.job4j.chess.figures.Figure;
+
 
 /**
  * //TODO add comments.

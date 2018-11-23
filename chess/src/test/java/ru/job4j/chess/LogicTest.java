@@ -6,8 +6,9 @@ import org.junit.rules.ExpectedException;
 import ru.job4j.chess.exceptions.FigureNotFoundException;
 import ru.job4j.chess.exceptions.ImpossibleMoveException;
 import ru.job4j.chess.exceptions.OccupiedWayException;
-import ru.job4j.chess.firuges.Cell;
-import ru.job4j.chess.firuges.black.BishopBlack;
+import ru.job4j.chess.figures.Cell;
+import ru.job4j.chess.figures.Figure;
+import ru.job4j.chess.figures.black.BishopBlack;
 
 import static org.junit.Assert.*;
 
