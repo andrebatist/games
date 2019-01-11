@@ -4,9 +4,10 @@ import ru.job4j.chess.exceptions.ImpossibleMoveException;
 import ru.job4j.chess.figures.Cell;
 import ru.job4j.chess.figures.Figure;
 
+import java.util.stream.IntStream;
+
 
 /**
- *
  * @author Petr Arsentev (parsentev@yandex.ru)
  * @version $Id$
  * @since 0.1
@@ -30,9 +31,8 @@ public class BishopBlack extends Figure {
         Cell[] cells = new Cell[7];
         int deltaX = source.x < dest.x ? 1 : -1;
         int deltaY = source.y < dest.y ? 1 : -1;
-        for (int i = 1; i <= Math.abs(dest.x - source.x); i++) {
-            cells[i - 1] = Cell.getCell(source.x + i * deltaX, source.y + i * deltaY);
-        }
+        IntStream.range(1, Math.abs(dest.x - source.x) + 1)
+                .forEach(i -> cells[i - 1] = Cell.getCell(source.x + i * deltaX, source.y + i * deltaY));
         return cells;
     }
 

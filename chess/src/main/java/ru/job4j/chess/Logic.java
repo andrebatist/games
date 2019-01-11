@@ -6,6 +6,9 @@ import ru.job4j.chess.exceptions.OccupiedWayException;
 import ru.job4j.chess.figures.Cell;
 import ru.job4j.chess.figures.Figure;
 
+import java.util.OptionalInt;
+import java.util.stream.IntStream;
+
 
 /**
  * //TODO add comments.
@@ -24,7 +27,7 @@ public class Logic {
 
     public boolean move(Cell source, Cell dest) {
         try {
-            wayValidate(source,dest);
+            wayValidate(source, dest);
         } catch (RuntimeException re) {
             re.printStackTrace();
             return false;
@@ -33,21 +36,16 @@ public class Logic {
     }
 
     public void clean() {
-        for (int position = 0; position != this.figures.length; position++) {
-            this.figures[position] = null;
-        }
+        IntStream.range(0, this.figures.length)
+                .forEach(position -> this.figures[position] = null);
         this.index = 0;
     }
 
     private int findBy(Cell cell) {
-        int rst = -1;
-        for (int index = 0; index != this.figures.length; index++) {
-            if (this.figures[index] != null && this.figures[index].getPosition().equals(cell)) {
-                rst = index;
-                break;
-            }
-        }
-        return rst;
+        OptionalInt optRst = IntStream.range(0, this.figures.length)
+                .filter(index -> this.figures[index] != null && this.figures[index].getPosition().equals(cell))
+                .findFirst();
+        return optRst.isPresent() ? optRst.getAsInt() : -1;
     }
 
     public void wayValidate(Cell source, Cell dest) throws ImpossibleMoveException,
