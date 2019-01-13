@@ -6,7 +6,7 @@ import static org.junit.Assert.assertThat;
 
 public class Logic3TTest {
 
-    @Test
+    /*@Test
     public void whenHasXWinner() {
         Figure3T[][] table = {
                 {new Figure3T(true, false), new Figure3T(), new Figure3T()},
@@ -83,5 +83,5 @@ public class Logic3TTest {
         };
         Logic3T login = new Logic3T(table);
         assertThat(login.hasGap(), is(true));
-    }
+    }*/
 }
